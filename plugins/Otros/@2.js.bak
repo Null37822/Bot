@@ -1,0 +1,23 @@
+async function execute({ socket, sender, reply }) {
+    try {
+        // Obtener información del contacto desde la API de Baileys
+        const contact = await socket.getContact(sender);
+        
+        // Verificar si tiene un nombre guardado
+        let name = contact?.notify || contact?.name || "Sin nombre guardado";
+
+        // Enviar el mensaje con el nombre guardado
+        await socket.sendMessage(sender, {
+            text: `Así te tienen agendado: *${name}*`
+        });
+
+    } catch (error) {
+        reply("❌ Ocurrió un error al obtener el nombre.");
+        console.error("Error en /@2:", error);
+    }
+}
+
+module.exports = {
+    command: "@2",
+    execute
+};

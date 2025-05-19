@@ -1,0 +1,33 @@
+#!/bin/bash
+
+echo "🚀 Iniciando el bot con optimización de recursos..."
+
+# Crear carpetas necesarias sin redundancia
+mkdir -p temp logs plugins
+
+# Evitar instalación de dependencias innecesarias
+if [ ! -d "node_modules" ]; then
+    echo "⚠️ No se encontraron dependencias. Por favor, instálalas manualmente."
+    exit 1
+fi
+
+# Archivo de bloqueo para evitar múltiples instancias
+LOCKFILE="./bot.lock"
+if [ -f "$LOCKFILE" ]; then
+    echo "⚠️ El bot ya está en ejecución. Saliendo..."
+    exit 1
+fi
+echo $$ > "$LOCKFILE"
+
+# Limpiar logs antiguos para ahorrar espacio
+rm -f bot.log nohup.out
+
+# Iniciar el bot con Node.js y límite de memoria reducido
+echo "🚦 Ejecutando el bot con optimización de memoria..."
+node --max-old-space-size=32 ./connection.js &
+
+# Mantener el proceso activo sin consumir CPU
+wait $!
+
+# Eliminar archivo de bloqueo al salir
+rm -f "$LOCKFILE"

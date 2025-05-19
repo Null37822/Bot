@@ -1,0 +1,43 @@
+const fs = require("fs");
+const path = require("path");
+
+module.exports = {
+  command: "bug",
+  async execute({ reply }) {
+    try {
+      // Ruta del archivo bug.txt
+      const filePath = "./bug.txt"; // Puedes cambiarlo si está en otra ubicación
+      
+      // Verificar si el archivo existe
+      if (!fs.existsSync(filePath)) {
+        return reply("❌ El archivo *bug.txt* no existe en la carpeta de plugins.");
+      }
+
+      // Leer el contenido del archivo
+      let content = fs.readFileSync(filePath, "utf-8").trim();
+
+      if (!content) {
+        return reply("❌ El archivo *bug.txt* está vacío.");
+      }
+
+      const MAX_LENGTH = 4096; // Límite máximo de caracteres en un mensaje de WhatsApp
+
+      // Si el contenido es menor al límite, duplicarlo hasta alcanzar el máximo permitido
+      while (content.length < MAX_LENGTH) {
+        content += "\n\n" + content;
+      }
+
+      // Si el contenido excede el límite, recortarlo
+      if (content.length > MAX_LENGTH) {
+        content = content.substring(0, MAX_LENGTH);
+      }
+
+      // Enviar el mensaje
+      await reply(content);
+
+    } catch (error) {
+      console.error("❌ Error en el comando /bug:", error);
+      reply("❌ Ocurrió un error al procesar el archivo *bug.txt*.");
+    }
+  },
+};

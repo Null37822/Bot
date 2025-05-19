@@ -1,0 +1,32 @@
+{
+  "name": "lite-bot",
+  "version": "1.1.0",
+  "description": "Bot de WhatsApp minimalista multifunções.",
+  "main": "start.js",
+  "scripts": {
+    "start": "node --watch ./connection.js",
+    "test": "node ./test.js"
+  },
+  "keywords": [
+    "whatsapp",
+    "bot",
+    "lite",
+    "devgui"
+  ],
+  "author": "Dev Gui",
+  "license": "MIT",
+  "dependencies": {
+    "@bochilteam/scraper": "^5.0.1",
+    "@bochilteam/scraper-images": "^5.0.0",
+    "@sefinek/google-tts-api": "^2.1.8",
+    "axios": "^1.7.7",
+    "baileys": "^6.7.9",
+    "correios-brasil": "^3.0.6",
+    "hercai": "^12.4.0",
+    "jimp": "^0.16.13",
+    "levenshtein-edit-distance": "^3.0.1",
+    "moment": "^2.30.1",
+    "pdf-parse": "^1.1.1",
+    "pino": "^8.15.0"
+  }
+}

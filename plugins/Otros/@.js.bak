@@ -1,0 +1,29 @@
+async function execute({ socket, sender, reply, command }) {
+    try {
+        if (command === "@") {
+            const formattedMention = `@${sender.split("@")[0]}`; // Formato de mención
+
+            // Enviar el mensaje con la mención real
+            await socket.sendMessage(sender, {
+                text: formattedMention,
+                mentions: [sender]
+            });
+        } else if (command === "@2") {
+            // Obtener la información del contacto
+            const contact = await socket.store.contacts[sender] || {};
+            const name = contact.name || contact.notify || "No tiene un nombre guardado";
+
+            // Enviar el mensaje con el nombre guardado
+            await socket.sendMessage(sender, { text: `📌 Te tiene agendado como: *${name}*` });
+        }
+
+    } catch (error) {
+        reply("❌ Ocurrió un error.");
+        console.error(`Error en ${command}:`, error);
+    }
+}
+
+module.exports = {
+    commands: ["@", "@2"],  // Se registran ambos comandos
+    execute
+};

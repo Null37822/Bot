@@ -1,0 +1,47 @@
+[36m░█░░░▀█▀░▀█▀░█▀▀░░░█▀▄░█▀█░▀█▀[0m
+░█░░░░█░░░█░░█▀▀░░░█▀▄░█░█░░█░
+[36m░▀▀▀░▀▀▀░░▀░░▀▀▀░░░▀▀░░▀▀▀░░▀░[0m
+[36m🤖 Versão: [0m1.1.0
+
+[32m[🎉 LITE: SUCESSO][0m [32mFui conectado com sucesso![0m
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📥 Comando detectado: "/autopf"
+👤 Enviado por: 5493814599125
+🔍 Tipo de mensaje recibido: extendedTextMessage
+📌 En: Chat Privado
+📂 Plugins disponibles: [ ping, autopf, tts, voz ]
+✅ Ejecutando comando: "/autopf"
+✅ Respuesta enviada: "📸 *Uso del comando AutoPF:*
+
+🔹 */autopf on* - Activar el cambio automático de foto
+🔹 */autopf off* - Desactivar el cambio automático de foto"
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📥 Comando detectado: "/autopf"
+👤 Enviado por: 5493814599125
+🔍 Tipo de mensaje recibido: extendedTextMessage
+📌 En: Chat Privado
+📂 Plugins disponibles: [ ping, autopf, tts, voz ]
+✅ Ejecutando comando: "/autopf"
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ Respuesta enviada: "✅ Auto cambio de foto de perfil *activado*."
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+<--- Last few GCs --->
+
+[28896:0xb4000071b5ab4000]    31398 ms: Mark-Compact 33.8 (39.6) -> 33.3 (43.3) MB, pooled: 0 MB, 78.70 / 0.00 ms  (average mu = 0.823, current mu = 0.090) allocation failure; scavenge might not succeed
+
+
+<--- JS stacktrace --->
+
+FATAL ERROR: Reached heap limit Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+
+Failed running './connection.js'

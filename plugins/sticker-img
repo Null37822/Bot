@@ -1,0 +1,63 @@
+const { createCanvas } = require("canvas");
+const fs = require("fs");
+const path = require("path");
+const { sticker } = require("../lib/sticker.js");
+
+module.exports = {
+  command: "attp",
+  execute: async ({ reply, text, socket, sender }) => {
+    try {
+      if (!text || text.trim() === "") {
+        return reply("❌ Debes escribir un texto.");
+      }
+
+      console.log(`✅ Comando /attp ejecutado con texto: "${text}"`);
+
+      // Crear imagen con texto
+      const canvas = createCanvas(400, 150);
+      const ctx = canvas.getContext("2d");
+
+      // Fondo degradado
+      const gradient = ctx.createLinearGradient(0, 0, 400, 150);
+      gradient.addColorStop(0, "#FF5733");
+      gradient.addColorStop(1, "#FFC300");
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, 400, 150);
+
+      // Configurar texto
+      ctx.font = "bold 40px Arial";
+      ctx.fillStyle = "white";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText(text, 200, 75);
+
+      // Guardar imagen
+      const tempDir = path.join(__dirname, "..", "temp");
+      if (!fs.existsSync(tempDir)) fs.mkdirSync(tempDir, { recursive: true });
+
+      const imagePath = path.join(tempDir, "text_image.png");
+      const out = fs.createWriteStream(imagePath);
+      const stream = canvas.createPNGStream();
+      stream.pipe(out);
+
+      await new Promise((resolve) => out.on("finish", resolve));
+
+      // Convertir imagen en sticker
+      const stiker = await sticker(imagePath, false, "Sticker", "Bot");
+
+      // Enviar sticker
+      await socket.sendMessage(sender, {
+        sticker: stiker,
+      });
+
+      console.log("✅ Sticker enviado correctamente.");
+
+      // Eliminar imagen temporal
+      fs.unlinkSync(imagePath);
+      
+    } catch (error) {
+      console.error("❌ Error en el comando /attp:", error);
+      reply("⚠️ Ocurrió un error generando el sticker.");
+    }
+  }
+};

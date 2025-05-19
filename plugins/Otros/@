@@ -1,0 +1,21 @@
+async function execute({ socket, sender, reply }) {
+try {
+const formattedMention = @${sender.split("@")[0]}; // Formato de mención
+
+// Enviar el mensaje con la mención real  
+    await socket.sendMessage(sender, {  
+        text: formattedMention,  
+        mentions: [sender]  
+    });  
+
+} catch (error) {  
+    reply("❌ Ocurrió un error al generar la mención.");  
+    console.error("Error en /@:", error);  
+}
+
+}
+
+module.exports = {
+command: "@",
+execute
+};
